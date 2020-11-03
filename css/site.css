@@ -26,12 +26,12 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  color: transparent;
+  
 }
 
 #titleScreen > .jumbotron p {
     background: rgba(255, 255, 255, 0);
     padding: 0.25em 0.5em;
     border-radius: 0.5em;
-    color: transparent;
+    visibility: hidden;
 }
