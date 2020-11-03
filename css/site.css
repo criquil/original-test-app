@@ -26,7 +26,7 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  color: transparent;
+  visibility: hidden;
 }
 
 #titleScreen > .jumbotron p {
