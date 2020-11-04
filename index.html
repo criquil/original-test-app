@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Practice Test Automation Site</title>
+    <title>Login - Practice Test Automation Site</title>
 
     <link rel="stylesheet" type="text/css" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.4/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="css/jsQuizEngine.css">
@@ -17,224 +17,81 @@
     <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.4/bootstrap.min.js"></script>
     <script src="js/jsQuizEngine.js"></script>
     <script>
-        var quizEngine = null;
-        $(function () {
-            var selectedQuiz = location.href;
-			
-			if (selectedQuiz.indexOf('?') > -1) {
-			    selectedQuiz = selectedQuiz.substr(selectedQuiz.indexOf('?') + 1);
-				if (selectedQuiz.indexOf('#') > -1) {
-					selectedQuiz = selectedQuiz.substr(0, selectedQuiz.indexOf('#'));
-				}
-			} else {
-				selectedQuiz = null;
-			}
 
-			if (selectedQuiz !== null) {
-			    // fix referrals from Twitter and other services
-			    if (isNaN(+selectedQuiz.substr(0, 1))) {
-			        document.location = '?';
-			    }
-			}
+    function redirect()
+    {
+        window.location.replace("page.html");
+        return false;
+    }
+   $(document).ready(function() { /* code here */ 
+   
+    var form = document.getElementById("loginform")
+    if(document.getElementById("loginform")){
+   document.getElementById("loginform").addEventListener("submit", function(e){
+    if(!doValidationEmail()){
+        e.preventDefault();    //stop form from submitting
+        alert("Not valid email!");
+    }
+    else{
+        if(!doValidationPass()){
+            e.preventDefault();    //stop form from submitting
+            alert("Not valid Password!");
+        }
+        else{
+            if(!doValidation()){
+            e.preventDefault();    //stop form from submitting
+            alert("Not valid User / Password combination.");
+        }
+        
+        }
+    }
 
-			if (selectedQuiz) {
-			    $('#titleScreen').hide();
-			    $('#jsQuizEngine').show();
-			    quizEngine = jsQuizEngine($('#jsQuizEngine'), { quizUrl: 'quiz/Azure_70-532_Objective_' + selectedQuiz + '.htm' });
-			} else {
-			    $('#titleScreen').show();
-			    $('#jsQuizEngine, #navbar-intest').hide();
-			}
-        });
+
+
+
+    });
+   }
+   function doValidationEmail(){
+        var isValid = false;
+        //do your validation
+        isValid = /(^\s*$|^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(?:[a-zA-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum)$)/.test(document.getElementById("txtuser").value);
+        return isValid;
+    }
+    function doValidationPass(){
+        var isValid = false;
+        //do your validation
+        isValid = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(document.getElementById("txtpass").value);
+        return isValid;
+    }
+    function doValidation(){
+        var isValid = false;
+        //do your validation
+        
+        if(document.getElementById("txtuser").value == "cristian.rosa@accenture.com" && document.getElementById("txtpass").value =="Mypassword1#" )
+        isValid=true;
+        return isValid;
+    }
+   
+   });
+  
+      
+   
     </script>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="?">Cristian's test site</a>
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div id="navbar" class="collapse navbar-collapse">
-                <ul id="navbar-intest" class="nav navbar-nav">
-                    <li><a href="#" onclick="location.reload()">Reset Test</a></li>
-                    <li><a href="?">Back to Objectives</a></li>
-                </ul>
-
-            </div>
+    <section id="home-login">
+        <div class="container-login login">
+          <form id="loginform" class="box-login" method="post" onsubmit="return redirect()">
+                 
+            <h1>LOGIN</h1>
+            
+            <input type="text" id="txtuser" placeholder="user"><br>
+            <input type="password" id="txtpass" placeholder="pass"><br>
+            <input type="checkbox" id="chk"><span>Remember-me</span>
+            <input type="submit" id="btnsubmit" value="Login"><br>
+            <a href="#">Register</a><br>
+          </form>
         </div>
-    </nav>
-    <section class="container">
-
-	<div class="alert alert-danger" id="news">
-	    <strong>Notice: This is a testing site meant to be used for automation test trainings</strong>
-        </div>
-	    
-        <div id="titleScreen">
-            <div class="jumbotron">
-                <h1 >Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...</h1>
-                <p>
-                    Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido u  <a href="https://github.com/criquil/criquil.github.io">this is an hyperlink to my github</a> exam.
-                </p>
-            </div>
-
-	    <h2>Lorem Ipsum</h2>
-            <div id="objaccordian" class="panel-group" role="tablist" aria-multiselectable="true">
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingObj2">
-                        <h4 class="panel-title">
-                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseObj2" aria-expanded="false" aria-controls="collapseObj2">
-                                ¿Qué es Lorem Ipsum?
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseObj2" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingObj2">
-                        <div class="panel-body">
-                            <p>
-                                Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingObj4">
-                        <h4 class="panel-title">
-                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseObj4" aria-expanded="false" aria-controls="collapseObj4">
-                                ¿Por qué lo usamos?
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseObj4" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingObj4">
-                        <div class="panel-body">
-                            <p>
-                                Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tiene una distribución más o menos normal de las letras, al contrario de usar textos como por ejemplo "Contenido aquí, contenido aquí". Estos textos hacen parecerlo un español que se puede leer. Muchos paquetes de autoedición y editores de páginas web usan el Lorem Ipsum como su texto por defecto, y al hacer una búsqueda de "Lorem Ipsum" va a dar por resultado muchos sitios web que usan este texto si se encuentran en estado de desarrollo. Muchas versiones han evolucionado a través de los años, algunas veces por accidente, otras veces a propósito (por ejemplo insertándole humor y cosas por el estilo).
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingObj1">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseObj1" aria-expanded="true" aria-controls="collapseObj1">
-                                ¿De dónde viene?
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseObj1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingObj1">
-                        <div class="panel-body">
-                            <p>
-                                Al contrario del pensamiento popular, el texto de Lorem Ipsum no es simplemente texto aleatorio. Tiene sus raices en una pieza cl´sica de la literatura del Latin, que data del año 45 antes de Cristo, haciendo que este adquiera mas de 2000 años de antiguedad. Richard McClintock, un profesor de Latin de la Universidad de Hampden-Sydney en Virginia, encontró una de las palabras más oscuras de la lengua del latín, "consecteur", en un pasaje de Lorem Ipsum, y al seguir leyendo distintos textos del latín, descubrió la fuente indudable. Lorem Ipsum viene de las secciones 1.10.32 y 1.10.33 de "de Finnibus Bonorum et Malorum" (Los Extremos del Bien y El Mal) por Cicero, escrito en el año 45 antes de Cristo. Este libro es un tratado de teoría de éticas, muy popular durante el Renacimiento. La primera linea del Lorem Ipsum, "Lorem ipsum dolor sit amet..", viene de una linea en la sección 1.10.32
-
-                                El trozo de texto estándar de Lorem Ipsum usado desde el año 1500 es reproducido debajo para aquellos interesados. Las secciones 1.10.32 y 1.10.33 de "de Finibus Bonorum et Malorum" por Cicero son también reproducidas en su forma original exacta, acompañadas por versiones en Inglés de la traducción realizada en 1914 por H. Rackham.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingObj1">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseObj1" aria-expanded="true" aria-controls="collapseObj1">
-                               ¿Dónde puedo conseguirlo?
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseObj1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingObj1">
-                        <div class="panel-body">
-                            <p>
-                                Hay muchas variaciones de los pasajes de Lorem Ipsum disponibles, pero la mayoría sufrió alteraciones en alguna manera, ya sea porque se le agregó humor, o palabras aleatorias que no parecen ni un poco creíbles. Si vas a utilizar un pasaje de Lorem Ipsum, necesitás estar seguro de que no hay nada avergonzante escondido en el medio del texto. Todos los generadores de Lorem Ipsum que se encuentran en Internet tienden a repetir trozos predefinidos cuando sea necesario, haciendo a este el único generador verdadero (válido) en la Internet. Usa un diccionario de mas de 200 palabras provenientes del latín, combinadas con estructuras muy útiles de sentencias, para generar texto de Lorem Ipsum que parezca razonable. Este Lorem Ipsum generado siempre estará libre de repeticiones, humor agregado o palabras no características del lenguaje, etc.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-
-            <div class="row">
-                <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail">
-                        <div class="caption">
-                            <h3>Youtube</h3>
-                            <p>this is a an hyperlink to youtube.</p>
-                            <p><a href="https://www.youtube.com/" target="_blank" role="button" class="btn btn-primary">Watch Videos</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail">
-                        <div class="caption">
-                            <h3>Facebook</h3>
-                            <p>this is an hyperlink to Facebook.</p>
-                            <p><a href="https://www.facebook.com/" target="_blank" role="button" class="btn btn-primary">Post Something</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail">
-                        <div class="caption">
-                            <h3>Selenium</h3>
-                            <p>this is an hyperlink to Selenium project.</p>
-                            <p><a href="selenium.dev" target="_blank" role="button" class="btn btn-primary">Automate It!</a></p>
-                        </div>
-                    </div>
-                </div>       
-            </div>
-        
-        </div>
-
-        <div id="jsQuizEngine">
-            <section id="title" data-bind="visible: !quizStarted()">
-                <div class="jumbotron">
-                    <h1 data-bind="text: quizTitle"></h1>
-                    <h2 data-bind="text: quizSubTitle"></h2>
-                    <p><button class="btn btn-primary btn-lg" data-bind="click: startQuiz">Start Practice Test</button></p>
-                </div>
-            </section>
-            <section class="quiz" data-bind="visible: quizStarted() && !quizComplete()">
-                <h5 data-bind="text: quizTitle"></h5>
-                <h3 data-bind="text: quizSubTitle"></h3>
-                <div>Question <span data-bind="text: currentQuestionIndex"></span> of <span data-bind="text: questionCount"></span></div>
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" data-bind="attr: { 'aria-valuenow': currentProgress }, style: { width: currentProgress() + '%' }"></div>
-                </div>
-                <div class="question-pool"></div>
-                <button class="btn btn-default" data-bind="click: movePreviousQuestion, disable: currentQuestionIsFirst">Previous</button>
-                <button class="btn btn-default" data-bind="click: showCurrentQuestionAnswer">Show Answer</button>
-                <button class="btn btn-primary" data-bind="click: moveNextQuestion, disable: currentQuestionIsLast, visible: !currentQuestionIsLast()">Next</button>
-                <button class="btn btn-primary" data-bind="click: calculateScore, visible: currentQuestionIsLast">Calculate Score</button>
-            </section>
-            <section class="score" data-bind="visible: quizComplete">
-                <h5 data-bind="text: quizTitle"></h5>
-                <h3 data-bind="text: quizSubTitle"></h3>
-                <p>Test Results:</p>
-                <div>Questions: <span data-bind="text: questionCount"></span></div>
-                <div>Date: <span data-bind="text: calculatedScoreDate"></span></div>
-                <div>Overall Score: <span data-bind="text: calculatedScore"></span>%</div>
-                <div>Correct Questions: <span data-bind="text: totalQuestionsCorrect"></span></div>
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" data-bind="attr: { 'aria-valuenow': calculatedScore }, style: { width: calculatedScore() + '%' }, css: { 'progress-bar-success': quizPassed, 'progress-bar-danger': !quizPassed() }"></div>
-                </div>
-                <div class="pass-indicator">
-                    <h1 data-bind="css: { 'text-success': quizPassed, 'text-danger': !quizPassed() }">
-                        <span data-bind="visible: quizPassed">PASS</span>
-                        <span data-bind="visible: !quizPassed()">FAIL</span>
-                    </h1>
-                </div>
-            </section>
-        </div>
-    </section>
-    <footer class="container">
-		
-        <p><small>Disclaimer: This project is a personal site meant to be used as a help test site to be able to perform some automation test on demand.</small></p>
-    </footer>
+      </section>
 </body>
 </html>
