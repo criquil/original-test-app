@@ -1,6 +1,9 @@
-function submit(){
-        
-        //document.getElementById("myForm").reset();
-        location.href ="page.html"; 
-        return false; 
-    }
+
+
+
+    function submit(){ 
+   //     $(location).attr('page.html')
+          location.location.href="page.html";
+alert("hhola");
+return false;
+            }

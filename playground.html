@@ -15,8 +15,8 @@
 
   <section>
     <h1 class="other-class">Forms Elements</h1>
-    <form id="myForm" >
-      <fieldset>
+    <form id="myForm" method="post" onsubmit="submit()">
+
         <!--
         Every fieldset must contain a legend. IE barfs if it's not there.
         It's no fun.
@@ -86,10 +86,10 @@
         </div>
 
         <div>
-          <input type="submit" value="Submit" onclick="submit()"/>
+          <input type="button" value="Save and Return" onclick="submit()"/>
         </div>
 
-      </fieldset>
+
     </form>
   </section>
 </body>
