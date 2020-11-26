@@ -16,72 +16,19 @@
     <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.4/bootstrap.min.js"></script>
     <script src="js/jsQuizEngine.js"></script>
+    <script src="js/login.js"></script> 
     <script>
 
-    function redirect()
-    {
-        window.location.replace("page.html");
-        return false;
-    }
-   $(document).ready(function() { /* code here */ 
    
-    var form = document.getElementById("loginform")
-    if(document.getElementById("loginform")){
-   document.getElementById("loginform").addEventListener("submit", function(e){
-    if(!doValidationEmail()){
-        e.preventDefault();    //stop form from submitting
-        alert("Not valid email!");
-    }
-    else{
-        if(!doValidationPass()){
-            e.preventDefault();    //stop form from submitting
-            alert("Not valid Password!");
-        }
-        else{
-            if(!doValidation()){
-            e.preventDefault();    //stop form from submitting
-            alert("Not valid User / Password combination.");
-        }
-        
-        }
-    }
-
-
-
-
-    });
-   }
-   function doValidationEmail(){
-        var isValid = false;
-        //do your validation
-        isValid = /(^\s*$|^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(?:[a-zA-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum)$)/.test(document.getElementById("txtuser").value);
-        return isValid;
-    }
-    function doValidationPass(){
-        var isValid = false;
-        //do your validation
-        isValid = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(document.getElementById("txtpass").value);
-        return isValid;
-    }
-    function doValidation(){
-        var isValid = false;
-        //do your validation
-        
-        if(document.getElementById("txtuser").value == "cristian.rosa@accenture.com" && document.getElementById("txtpass").value =="Mypassword1#" )
-        isValid=true;
-        return isValid;
-    }
-   
-   });
   
       
-   
+
     </script>
 </head>
 <body>
     <section id="home-login">
         <div class="container-login login">
-          <form id="loginform" class="box-login" method="post" onsubmit="return redirect()">
+          <form id="loginform" class="box-login" method="post" onsubmit="return validate()">
                  
             <h1 a="formTitle">LOGIN</h1>
             
@@ -89,7 +36,7 @@
             <input type="password" id="txtpass" placeholder="pass"><br>
             <input type="checkbox" id="rememberChk"><span id="rememberTxt">Remember-me</span>
             <input type="submit" id="btnsubmit" value="Login"><br>
-            <a id="linkregister" href="#">Register</a><br>
+            <span id="errorMsg" style="color:red"></span><br>
           </form>
         </div>
       </section>
